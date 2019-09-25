@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/eXiz7/3rdPersonBrawlServer/issues"
   },
-  "homepage": "https://github.com/eXiz7/3rdPersonBrawlServer#readme"
+  "homepage": "https://github.com/eXiz7/3rdPersonBrawlServer#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
 }
