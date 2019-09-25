@@ -36,10 +36,31 @@ io.on('connection', (socket) => {
     });
 
     // when the client emits 'new message', this listens and executes
-    socket.on('new message', (data) => {
+    socket.on('spawn character', (data) => {    // {user: user, info: {position}}
         // we tell the client to execute 'new message'
         console.log("Msg: " + data);
-        socket.broadcast.emit('new message', data);
+        socket.broadcast.emit('spawn character', data);
+    });
+
+    // when the client emits 'new message', this listens and executes
+    socket.on('move character', (data) => {    // {user: user, info: {position}}
+        // we tell the client to execute 'new message'
+        console.log("Msg: " + data);
+        socket.broadcast.emit('move character', data);
+    });
+
+    // when the client emits 'new message', this listens and executes
+    socket.on('character shoot', (data) => {    // {user: user, info: {direction}}
+        // we tell the client to execute 'new message'
+        console.log("Msg: " + data);
+        socket.broadcast.emit('character shoot', data);
+    });
+
+    // when the client emits 'new message', this listens and executes
+    socket.on('character hit', (data) => {    // {user: user, info: {target, damage}}
+        // we tell the client to execute 'new message'
+        console.log("Msg: " + data);
+        socket.broadcast.emit('character shoot', data);
     });
 
     // when the user disconnects.. perform this
