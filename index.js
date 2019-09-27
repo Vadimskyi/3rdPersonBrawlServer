@@ -18,21 +18,29 @@ io.on('connection', (socket) => {
     var addedUser = false;
     console.log("User Connected!");
 
-    // when the client emits 'add user', this listens and executes
-    socket.on('add user', (user) => {
+    socket.on('join_game', (username) => {
+        console.log(username);
         if (addedUser) return;
-        console.log("add user: " + user.username);
-        user.id = createUserId();
+
+        const user = {
+            "Character":{
+                "UserId":0,
+                "MaxHealth":10.0,
+                "Position":{"x":30.4,"y":3.6,"z":-11.9},
+                "CurrentHealth":{"Value":10.0,"HasValue":true}
+            },
+            "Id": createUserId(),
+            "Name": username
+        }
+
         users[user.id] = user;
         socket.user = user;
         addedUser = true;
 
-        socket.emit('login', {
-            user
-        });
+        socket.emit('user_data', user);
 
         // echo globally (all clients) that a person has connected
-        socket.broadcast.emit('user joined', user.username);
+        socket.broadcast.emit('new_user_joined', user);
     });
 
     // when the client emits 'new message', this listens and executes
@@ -65,11 +73,10 @@ io.on('connection', (socket) => {
 
     // when the user disconnects.. perform this
     socket.on('disconnect', () => {
-        console.log("disconnect: " + socket.user.username);
         if (addedUser) {
             delete users[socket.user.id];
             // echo globally that this client has left
-            socket.broadcast.emit('user left', socket.username);
+            socket.broadcast.emit('user left', socket.user.username);
         }
     });
 });
