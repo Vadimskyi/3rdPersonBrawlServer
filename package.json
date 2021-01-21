@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/eXiz7/3rdPersonBrawlServer#readme",
   "dependencies": {
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "typescript-tslint-plugin": "^0.5.4"
   },
   "devDependencies": {
